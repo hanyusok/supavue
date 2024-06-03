@@ -27,8 +27,8 @@ const handleKakaoLogin = async () => {
     loading.value = true
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',   
-      // options: {
-      //   redirectTo: `http:/localhost:5173/auth/callback` },
+      options: {
+        redirectTo: `http:/localhost:5173/auth/callback` },
     })
     if (error) throw error
     alert('Check your kakao ID for the login link!')
@@ -62,6 +62,6 @@ const handleKakaoLogin = async () => {
       
     </div>
   </form>
-  <button onclick="handleKakaoLogin">kakao Login</button>
+  <button @click="handleKakaoLogin">kakao Login</button>
   
 </template>
