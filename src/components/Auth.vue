@@ -5,22 +5,22 @@ import { supabase } from '../supabase'
 const loading = ref(false)
 const email = ref('')
 
-const handleLogin = async () => {
-  try {
-    loading.value = true
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.value,
-    })
-    if (error) throw error
-    alert('Check your email for the login link!')
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message)
-    }
-  } finally {
-    loading.value = false
-  }
-}
+// const handleLogin = async () => {
+//   try {
+//     loading.value = true
+//     const { error } = await supabase.auth.signInWithOtp({
+//       email: email.value,
+//     })
+//     if (error) throw error
+//     alert('Check your email for the login link!')
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       alert(error.message)
+//     }
+//   } finally {
+//     loading.value = false
+//   }
+// }
 
 const handleKakaoLogin = async () => {
   try {
@@ -28,7 +28,7 @@ const handleKakaoLogin = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',   
       options: {
-        redirectTo: `http:/localhost:5173/auth/callback` },
+        redirectTo: `http://localhost:5173/auth/callback` },
     })
     if (error) throw error
     alert('Check your kakao ID for the login link!')
@@ -44,7 +44,7 @@ const handleKakaoLogin = async () => {
 </script>
 
 <template>
-  <form class="row flex-center flex" @submit.prevent="handleLogin">
+  <!-- <form class="row flex-center flex" @submit.prevent="handleLogin">
     <div class="col-6 form-widget">
       <h1 class="header">Supabase + Vue 3</h1>
       <p class="description">Sign in via magic link with your email below</p>
@@ -61,7 +61,12 @@ const handleKakaoLogin = async () => {
       </div>
       
     </div>
-  </form>
-  <button @click="handleKakaoLogin">kakao Login</button>
+  </form> -->
+  <div class="col-6 primary">
+    <h1 class="header">Supabase + Vue 3</h1>
+      <p class="description">Sign in via social link with KakaoTalk</p>
+    <button @click="handleKakaoLogin">kakao Login</button>
+  </div>
+  
   
 </template>
