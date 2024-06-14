@@ -1,7 +1,9 @@
 <script setup>
 import Avatar from './Avatar.vue'
+import HomeView from '@/views/HomeView.vue'
 import { supabase } from '../supabase'
 import { onMounted, ref, toRefs } from 'vue'
+import { RouterLink, routerViewLocationKey } from 'vue-router';
 
 const props = defineProps(['session'])
 const { session } = toRefs(props)
@@ -54,6 +56,7 @@ async function updateProfile() {
     }
 
     const { error } = await supabase.from('profiles').upsert(updates)
+    
 
     if (error) throw error
   } catch (error) {
@@ -77,7 +80,9 @@ async function signOut() {
 </script>
 
 <template>
-  <form class="form-widget" @submit.prevent="updateProfile">
+
+  
+    <form class="form-widget" @submit.prevent="updateProfile">
     <Avatar v-model:path="avatar_url" @upload="updateProfile" size="10" />
     <div>
       <label for="email">Email</label>
@@ -103,6 +108,11 @@ async function signOut() {
 
     <div>
       <button class="button block" @click="signOut" :disabled="loading">Sign Out</button>
-    </div>
+    </div>   
   </form>
+  <div>
+      <button :RouterLink="home">go to HOME</button>
+  </div>
+    
+  
 </template>
