@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { supabase } from '../supabase'
+import { supabase } from '@/supabase'
+import router from '@/router'
 
 const loading = ref(false)
 
@@ -13,7 +14,8 @@ const handleKakaoLogin = async () => {
         redirectTo: `http://localhost:5173/auth/callback` },
     })
     if (error) throw error
-    alert('Check your kakao ID for the login link!')
+    alert('now you are going to login with Kakao Account!')
+    
   } catch (error) {
     if (error instanceof Error) {
       alert(error.message)
