@@ -10,7 +10,7 @@ import Login from '@/components/Login.vue'
 const { user } = useAuth()
 
 const routes = [
-  { path: '/', component: HomeView },
+  { path: '/home', component: HomeView },
   { path: '/calldoctor', component: CallsView, meta: { requiresAuth: true}  },
   { path: '/messagesfrom', component: MessagesView, meta: { requiresAuth: true} },
   { path: '/login', component: Login },

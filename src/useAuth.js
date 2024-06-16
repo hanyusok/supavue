@@ -5,7 +5,7 @@ const user = ref(null)
 const loading = ref(false)
 
 export function useAuth(){
-    const handleKakaoLogin = async () => {
+    const kakaoLogin = async () => {
         try {
           loading.value = true
           const { data, error } = await supabase.auth.signInWithOAuth({
@@ -44,17 +44,23 @@ export function useAuth(){
           })
     }
 
-    onMounted(() => {
-        getUser()
-        supabase.auth.onAuthStateChange((_, _session) => {
-            user.value = _session?.user || null
-          })
-    })
+    const isLoggedIn = () => {
+      //
+    }
+
+    // onMounted(() => {
+    //     getUser()
+    //     supabase.auth.onAuthStateChange((_, _session) => {
+    //         user.value = _session?.user || null
+    //       })
+    // })
 
     return {
         user,
-        handleKakaoLogin,
+        loading,
+        kakaoLogin,
         signOut,
+        isLoggedIn,
         getUser
     }
 

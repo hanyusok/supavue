@@ -1,7 +1,7 @@
 <script setup>
-import Avatar from './Avatar.vue'
+import Avatar from '@/components/Avatar.vue'
 import HomeView from '@/views/HomeView.vue'
-import { supabase } from '../supabase'
+import { supabase } from '@/supabase'
 import { onMounted, ref, toRefs } from 'vue'
 import { RouterLink, routerViewLocationKey } from 'vue-router';
 
@@ -15,6 +15,9 @@ const avatar_url = ref('')
 
 onMounted(() => {
   getProfile()
+  supabase.auth.onAuthStateChange((_, _session) => {
+    user.value = _session?.user || null
+  })
 })
 
 async function getProfile() {

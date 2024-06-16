@@ -1,15 +1,19 @@
 <script setup>
 import { ref } from 'vue'
-
-import { useAuth } from '@/useAuth'
+import router from '@/router'
+import {useAuth}  from '@/useAuth'
   
-const handleKakaoLogin = useAuth.handleKakaoLogin()   
-      
-      
-      
-  
+const { kakaoLogin, user, loading } = useAuth()   
+const handleKakaoLogin = async () => {
+  try {
+    await kakaoLogin()
+    router.push('/home')
+  } catch (error) {
+    alert(error.message)
+  }
+}
+    
 </script>
-  
 
 <template>
     <div class="col-6 primary">
